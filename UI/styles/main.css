@@ -1,0 +1,22 @@
+.btn-dark-blue-litle {
+  background: #1c3a75;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-light-blue-big {
+  background: #3a6ddc;
+  padding: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-dark-blue-litle:hover,
+.btn-light-blue-big:hover {
+  background: #001a4f;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}

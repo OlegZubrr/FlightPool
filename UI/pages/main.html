@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../assets/icon.ico" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/mainPage.css" />
+    <link rel="stylesheet" href="../styles/keyframes.css" />
+    <title>FlightPool</title>
+  </head>
+  <body data-page="main">
+    <div class="mainContainer">
+      <h2>Just fly</h2>
+      <div class="flighFormContainer">
+        <h3>Enter your data</h3>
+        <ul class="dataList">
+          <li class="fromRow">
+            <p>From</p>
+            <p id="fromCity" class="btn-dark-blue-litle">Minsk</p>
+            <ul id="fromList">
+              <li id="fromListSearch">
+                <input type="text" placeholder="Enter the city name" />
+              </li>
+              <li class="fromCityElement">Moskow</li>
+              <li class="fromCityElement">Minsk</li>
+              <li class="fromCityElement">Brest</li>
+            </ul>
+          </li>
+          <li class="whereRow">
+            <p>Where</p>
+            <p id="whereCity" class="btn-dark-blue-litle">Moskow</p>
+            <ul id="whereList">
+              <li id="whereListSearch">
+                <input type="text" placeholder="Enter the city name" />
+              </li>
+              <li class="whereCityElement">Moskow</li>
+              <li class="whereCityElement">Minsk</li>
+              <li class="whereCityElement">Brest</li>
+            </ul>
+          </li>
+          <li class="departingRow">
+            <p>Departing</p>
+            <input type="date" id="departingInput" />
+          </li>
+          <li class="returningRow">
+            <p>Returning</p>
+            <input type="date" id="returningInput" />
+          </li>
+          <li class="PassengersRow">
+            <p>Passengers</p>
+            <input
+              type="number"
+              min="1"
+              max="8"
+              value="1"
+              id="passengersInput"
+            />
+          </li>
+        </ul>
+        <a id="sendDataBtn" class="btn-light-blue-big">Find Flight</a>
+      </div>
+    </div>
+    <script type="module" src="../scripts/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "JetBrains Mono", monospace;
+  color: #001a33;
+}
+
+body {
+  height: 100vh;
+  background: url("../assets/clear-air-fly-fantastic-travel.jpg");
+  animation: moveBg 15s ease infinite;
+  overflow: hidden;
+  background-size: 150% auto;
+  display: flex;
+  align-items: center;
+  padding-left: 1%;
+}
+
+.sidebar {
+  height: 80%;
+  width: 30%;
+  background: rgba(240, 248, 255, 0.85);
+  border-radius: 15px;
+}
+
+.sidebar h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 5px;
+}
+
+.content {
+  width: 60%;
+  height: 80%;
+  background: rgba(240, 248, 255, 0.85);
+  margin-left: 4%;
+  border-radius: 15px;
+}
+
+.content h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 5px;
+}
+
+.flightsData {
+  margin-top: 5%;
+  height: 80%;
+  width: 100%;
+  margin-left: 5%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.flightsData::-webkit-scrollbar {
+  display: none;
+}
+
+.flightCart {
+  background: linear-gradient(
+    135deg,
+    rgba(98, 128, 217, 0.8),
+    rgba(135, 206, 250, 0.83)
+  );
+  width: 90%;
+  height: 150px;
+  border-radius: 15px;
+  display: flex;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.flightCart .priceSide {
+  height: 100%;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.priceSide .flightPrice {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.SelectFlightBtn {
+  background: linear-gradient(45deg, #ec8e23, #f3a340);
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 20px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.SelectFlightBtn:hover {
+  background: linear-gradient(45deg, #e37d09, #ea8e1e);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.flightCart .flightSide {
+  display: flex;
+  height: 100%;
+  width: 80%;
+  margin-left: 20px;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.flightSide .dataOfFlight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dataOfFlight .timeOfDeparture {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.dataOfFlight .cityOfDeparture,
+.dataOfFlight .dateOfDeparture {
+  color: #6c7581;
+}
+
+.flightSide .flightImg {
+  height: 100px;
+}
+
+.flightTimeData .flightTime {
+  position: relative;
+  cursor: default;
+  --tooltip-text-time: "Flight Time: 2h 31m";
+}
+
+.flightTimeData .flightTime::after {
+  content: var(--tooltip-text-time);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.flightTimeData .flightTime:hover::after {
+  opacity: 1;
+}
+
+.aircraftData {
+  cursor: default;
+  position: relative;
+  --tooltip-text-aircraft: "Aircraft: Boing 737\A Flight Number: aa8a4cc2";
+}
+
+.aircraftData::after {
+  content: var(--tooltip-text-aircraft);
+  white-space: pre;
+  position: absolute;
+  bottom: 90%;
+  left: 80%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.aircraftData:hover::after {
+  opacity: 1;
+}
+.aircraftData .aircraft {
+  margin-bottom: 3px;
+}

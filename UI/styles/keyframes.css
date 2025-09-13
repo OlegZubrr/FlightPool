@@ -1,0 +1,41 @@
+@keyframes typing {
+  0% {
+    width: 0ch;
+  }
+  60% {
+    width: 8ch;
+  }
+  75% {
+    width: 8ch;
+  }
+  80% {
+    width: 0ch;
+  }
+  100% {
+    width: 0ch;
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes moveBg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
