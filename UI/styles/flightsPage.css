@@ -116,13 +116,16 @@ body {
   justify-content: center;
 }
 
-.dataOfFlight .timeOfDeparture {
+.timeOfDeparture,
+.timeOfArrival {
   font-size: 1.3rem;
   margin-bottom: 10px;
 }
 
-.dataOfFlight .cityOfDeparture,
-.dataOfFlight .dateOfDeparture {
+.cityOfDeparture,
+.dateOfDeparture,
+.cityOfArrival,
+.dateOfArrival {
   color: #6c7581;
 }
 
