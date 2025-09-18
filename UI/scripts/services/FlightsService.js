@@ -1,0 +1,1 @@
+const getFlightsByParams = (data) => {};

@@ -15,8 +15,8 @@ class Flight {
       to: this.to,
       flight: this.flight,
       aircraft: this.aircraft,
-      departure: this.departureRaw.toISOString(),
-      arrival: this.arrivalRaw.toISOString(),
+      departure: this.departure.toISOString(),
+      arrival: this.arrival.toISOString(),
       cost: this.cost,
       duration: this.getDurationMinutes(),
     };

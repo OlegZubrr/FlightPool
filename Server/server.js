@@ -15,7 +15,6 @@ app.use(express.static(path.join(__dirname, "..", "UI")));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "UI", "pages", "main.html"));
 });
-
 app.listen(PORT, () => {
   console.log(`Server started on port: ${PORT}`);
 });

@@ -112,6 +112,7 @@ body::after {
 .fromCityElement {
   padding: 5px;
   transition: all 0.5s ease;
+  cursor: pointer;
 }
 
 .fromCityElement:hover,
@@ -159,4 +160,29 @@ body::after {
 #sendDataBtn {
   margin: 0 auto;
   margin-top: 20px;
+}
+
+.errorBox {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  width: 350px;
+  height: 250px;
+  z-index: 100;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: all 0.5s ease;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.errorBox.show {
+  max-height: 300px;
+  opacity: 1;
 }
