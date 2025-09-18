@@ -88,6 +88,10 @@ body::after {
 
 .fromRow {
   position: relative;
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #fromList {
@@ -127,6 +131,14 @@ body::after {
 
 .whereRow {
   position: relative;
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.whereRow p {
+  white-space: nowrap;
 }
 
 #whereList {

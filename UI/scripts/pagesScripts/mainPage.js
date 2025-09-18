@@ -1,4 +1,5 @@
 import { LiveSearch } from "../modules/liveSearch.js";
+import { ErrorBox } from "../modules/ErrorBox.js";
 const initMain = () => {
   const fromCity = document.getElementById("fromCity");
   const fromList = document.getElementById("fromList");

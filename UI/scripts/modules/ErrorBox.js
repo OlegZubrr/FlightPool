@@ -16,3 +16,5 @@ class ErrorBox {
     this.container.classList.remove("show");
   };
 }
+
+export { ErrorBox };
