@@ -1,13 +1,27 @@
 class ErrorBox {
   constructor(containerId) {
     this.container = document.getElementById(containerId);
+    this.timeoutId = null;
+    this.init();
   }
 
-  show = (message, duration = 300) => {
+  init = () => {
+    this.container.addEventListener("click", () => {
+      this.hide();
+    });
+  };
+
+  show = (message, duration = 3000) => {
     this.container.textContent = message;
     this.container.classList.add("show");
 
-    setTimeout(() => {
+    console.log(this.timeoutId);
+
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+
+    this.timeoutId = setTimeout(() => {
       this.hide();
     }, duration);
   };

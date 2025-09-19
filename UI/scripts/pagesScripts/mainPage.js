@@ -1,5 +1,6 @@
 import { LiveSearch } from "../modules/liveSearch.js";
 import { ErrorBox } from "../modules/ErrorBox.js";
+import { NullChecker } from "../modules/NullChecker.js";
 const initMain = () => {
   const fromCity = document.getElementById("fromCity");
   const fromList = document.getElementById("fromList");
@@ -10,7 +11,7 @@ const initMain = () => {
   const returningInput = document.getElementById("returningInput");
   const passengersInput = document.getElementById("passengersInput");
   const body = document.querySelector("body");
-
+  const errorBox = new ErrorBox("mainErrorBox");
   fromCity.addEventListener("click", (e) => {
     e.stopPropagation();
     whereList.classList.remove("show");
@@ -45,13 +46,33 @@ const initMain = () => {
     const returningData = returningInput.value;
     const passengersData = passengersInput.value;
 
-    const flightData = {
-      from: fromCityData,
-      to: toCityData,
-      departure: departingData,
-      arrival: returningData,
-      passengers: passengersData,
-    };
+    let errorMessage = NullChecker.defaultIfEmpty([
+      {
+        value: fromCityData,
+        defaultValue: "You have not selected a departure city",
+      },
+      {
+        value: toCityData,
+        defaultValue: "You have not selected the city of arrival",
+      },
+      {
+        value: departingData,
+        defaultValue: "You have not entered a departure date",
+      },
+      {
+        value: passengersData,
+        defaultValue: "You have not entered a count of passangers",
+      },
+    ]);
+
+    if (passengersData >= 9 || passengersData <= 0) {
+      errorMessage = "Invalid count of passengers";
+    }
+
+    if (errorMessage != "") {
+      errorBox.show(errorMessage);
+      return;
+    }
   });
 
   body.addEventListener("click", (e) => {
