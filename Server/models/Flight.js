@@ -24,3 +24,5 @@ class Flight {
     this.cost = price * Number(this.neededPlaces);
   }
 }
+
+export default Flight;

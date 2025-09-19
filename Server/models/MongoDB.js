@@ -1,10 +1,18 @@
 import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
+import path from "path";
+import mongoDB from "./models/MongoDB";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config(path.join(__dirname, "..", ".env"));
 
+const MONGO_URI = process.env.MONGO_URI;
 class MongoDB {
   #client;
   #db;
 
-  constructor(uri = "mongodb://localhost:27017", dbName = "db") {
+  constructor(uri = "mongodb://localhost:27017", dbName = "flight_pool") {
     this.uri = uri;
     this.dbName = dbName;
     this.#client = new MongoClient(this.uri);
@@ -39,5 +47,5 @@ class MongoDB {
   }
 }
 
-const mongoDB = new MongoDB();
+const mongoDB = new MongoDB(MONGO_URI, "flight_pool");
 export default mongoDB;
