@@ -18,7 +18,10 @@ class LiveSearch {
   filterList = () => {
     const query = this.input.value.toLowerCase().trim();
     const limit = 50;
-    Array.from(this.domList.children).forEach((domElement) => {
+    const serachElements = this.domList.getElementsByClassName(
+      this.domElementClass
+    );
+    Array.from(serachElements).forEach((domElement) => {
       domElement.remove();
     });
     let count = 0;

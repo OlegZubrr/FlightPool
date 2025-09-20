@@ -1,7 +1,8 @@
-import { LiveSearch } from "../modules/liveSearch.js";
+import { LiveSearch } from "../modules/LiveSearch.js";
 import { ErrorBox } from "../modules/ErrorBox.js";
 import { NullChecker } from "../modules/NullChecker.js";
-const initMain = () => {
+import ApiClient from "../services/ApiClient.js";
+const initMain = async () => {
   const fromCity = document.getElementById("fromCity");
   const fromList = document.getElementById("fromList");
   const whereCity = document.getElementById("whereCity");
@@ -10,8 +11,22 @@ const initMain = () => {
   const departingInput = document.getElementById("departingInput");
   const returningInput = document.getElementById("returningInput");
   const passengersInput = document.getElementById("passengersInput");
+  const fromListInput = document.getElementById("fromListSearch");
+  const whereListInput = document.getElementById("whereListSearch");
   const body = document.querySelector("body");
   const errorBox = new ErrorBox("mainErrorBox");
+
+  const api = new ApiClient();
+
+  const fromCityDataList = await api.get("/fromCities");
+
+  const fromCitiesLiveSearch = new LiveSearch(
+    fromListInput,
+    fromList,
+    fromCityDataList,
+    "fromCityElement"
+  );
+
   fromCity.addEventListener("click", (e) => {
     e.stopPropagation();
     whereList.classList.remove("show");

@@ -4,5 +4,5 @@ const page = document.body.dataset.page;
 
 switch (page) {
   case "main":
-    initMain();
+    await initMain();
 }
