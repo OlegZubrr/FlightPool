@@ -1,12 +1,12 @@
 class Flight {
-  constructor({ from, to, flight, aircraft, departure, arrival, cost }) {
+  constructor({ from, to, flight, aircraft, departure, arrival, price }) {
     this.from = from;
     this.to = to;
     this.flight = flight;
     this.aircraft = aircraft;
     this.departureRaw = new Date(departure);
     this.arrivalRaw = new Date(arrival);
-    this.cost = cost;
+    this.price = price;
 
     const totalMinutes = Math.round(
       (this.arrivalRaw - this.departureRaw) / (1000 * 60)
@@ -51,7 +51,7 @@ class Flight {
     flightCard.className = "flightCart";
     flightCard.setAttribute("id", this.flight);
     flightCard.innerHTML = `<div class="priceSide">
-            <h4 class="flightPrice">${this.cost}</h4>
+            <h4 class="flightPrice">${this.price}$</h4>
             <div class="aircraftData">
               <h5 class="aircraft">${this.aircraft}</h5>
               <h5 class="flight">${this.flight}</h5>
@@ -83,3 +83,5 @@ class Flight {
     return flightCard;
   };
 }
+
+export default Flight;

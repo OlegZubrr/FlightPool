@@ -31,6 +31,7 @@ const initMain = async () => {
     e.stopPropagation();
     whereList.classList.remove("show");
     fromList.classList.toggle("show");
+    fromListInput.focus();
   });
 
   whereCity.addEventListener("click", async (e) => {
@@ -48,6 +49,7 @@ const initMain = async () => {
 
     fromList.classList.remove("show");
     whereList.classList.toggle("show");
+    whereListInput.focus();
   });
 
   fromList.addEventListener("click", (e) => {
@@ -65,7 +67,7 @@ const initMain = async () => {
     whereList.classList.remove("show");
   });
 
-  sendDataBtn.addEventListener("click", () => {
+  sendDataBtn.addEventListener("click", async () => {
     const fromCityData = fromCity.textContent;
     const toCityData = whereCity.textContent;
     const departingData = departingInput.value;
@@ -99,6 +101,18 @@ const initMain = async () => {
       errorBox.show(errorMessage);
       return;
     }
+
+    const filters = {
+      from: fromCityData,
+      to: toCityData,
+      departure: departingData,
+      arrival: returningData,
+      passengers: passengersData,
+    };
+
+    sessionStorage.setItem("filters", JSON.stringify(filters));
+
+    window.location.href = "/flights";
   });
 
   body.addEventListener("click", (e) => {
@@ -111,4 +125,4 @@ const initMain = async () => {
   });
 };
 
-export { initMain };
+export default initMain;

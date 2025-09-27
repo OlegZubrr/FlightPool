@@ -14,10 +14,16 @@ const PORT = process.env.PORT;
 
 app.use(express.static(path.join(__dirname, "..", "UI")));
 
+app.use(express.json());
+
 await mongoDB.connect();
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "UI", "pages", "main.html"));
+});
+
+app.get("/flights", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "UI", "pages", "flights.html"));
 });
 
 app.get("/fromCities", async (req, res) => {
@@ -56,11 +62,15 @@ app.post("/flights/search", async (req, res) => {
   try {
     const filters = req.body;
 
-    // Проверка обязательных полей
-    if (!filters.from || !filters.to || !filters.departure) {
+    if (
+      !filters.from ||
+      !filters.to ||
+      !filters.departure ||
+      !filters.passengers
+    ) {
       return res.status(400).json({
         error:
-          "Invalid request: 'from', 'to' and 'departure' are required fields",
+          "Invalid request: 'from', 'to' , 'departure' and 'passengers' are required fields",
       });
     }
 
@@ -95,6 +105,10 @@ app.post("/flights/search", async (req, res) => {
     }
 
     const allFlights = [...toFlights, ...fromFlights];
+
+    allFlights.forEach((flight) => {
+      flight.price *= Number(filters.passengers);
+    });
 
     res.json(allFlights);
   } catch (err) {
