@@ -14,13 +14,14 @@ const PORT = process.env.PORT;
 
 app.use(express.static(path.join(__dirname, "..", "UI")));
 
+await mongoDB.connect();
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "UI", "pages", "main.html"));
 });
 
 app.get("/fromCities", async (req, res) => {
   try {
-    await mongoDB.connect();
     const flightsCollection = mongoDB.collection("flights");
 
     const fromCities = await flightsCollection.distinct("from");
@@ -32,7 +33,25 @@ app.get("/fromCities", async (req, res) => {
   }
 });
 
-app.get("/whereCities", async (req, res) => {});
+app.get("/toCities", async (req, res) => {
+  const { fromCity } = req.query;
+
+  if (!fromCity) {
+    return res.status(400).json({ error: "No city parametr" });
+  }
+
+  try {
+    const flightsCollection = mongoDB.collection("flights");
+
+    const toCities = await flightsCollection.distinct("to", { from: fromCity });
+
+    res.json(toCities);
+  } catch (err) {
+    console.error("Error getting toCities:", err.message, err.stack);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server started on port: ${PORT}`);
 });

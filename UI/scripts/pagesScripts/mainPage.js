@@ -33,8 +33,19 @@ const initMain = async () => {
     fromList.classList.toggle("show");
   });
 
-  whereCity.addEventListener("click", (e) => {
+  whereCity.addEventListener("click", async (e) => {
     e.stopPropagation();
+    const fromCityName = fromCity.textContent;
+    const whereCityDataList = await api.get(
+      `/toCities?fromCity=${fromCityName}`
+    );
+    const whereCitiesLiveSearch = new LiveSearch(
+      whereListInput,
+      whereList,
+      whereCityDataList,
+      "whereCityElement"
+    );
+
     fromList.classList.remove("show");
     whereList.classList.toggle("show");
   });
