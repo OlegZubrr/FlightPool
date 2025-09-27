@@ -76,19 +76,24 @@ app.post("/flights/search", async (req, res) => {
 
     const flightsCollection = mongoDB.collection("flights");
 
-    const date = new Date(filters.departure);
-    const nextDate = new Date(date);
-    nextDate.setDate(date.getDate() + 1);
+    const departureDate = new Date(filters.departure);
+    const nextDepartureDate = new Date(departureDate);
+    nextDepartureDate.setDate(departureDate.getDate() + 1);
 
     const toQuery = {
       from: filters.from,
       to: filters.to,
       departure: {
-        $gte: date,
-        $lt: nextDate,
+        $gte: departureDate,
+        $lt: nextDepartureDate,
       },
     };
+
     const toFlights = await flightsCollection.find(toQuery).toArray();
+
+    const arrivalDate = new Date(filters.arrival);
+    const nextArrivalDate = new Date(arrivalDate);
+    nextArrivalDate.setDate(arrivalDate.getDate() + 1);
 
     let fromFlights = [];
     if (filters.arrival) {
@@ -96,10 +101,9 @@ app.post("/flights/search", async (req, res) => {
         from: filters.to,
         to: filters.from,
         departure: {
-          $gte: date,
-          $lt: nextDate,
+          $gte: arrivalDate,
+          $lt: nextArrivalDate,
         },
-        arrival: filters.arrival,
       };
       fromFlights = await flightsCollection.find(fromQuery).toArray();
     }
