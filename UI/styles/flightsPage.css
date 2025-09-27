@@ -133,13 +133,13 @@ body {
   height: 100px;
 }
 
-.flightTimeData .flightTime {
+.flightTime {
   position: relative;
   cursor: default;
   --tooltip-text-time: "Flight Time: 2h 31m";
 }
 
-.flightTimeData .flightTime::after {
+.flightTime::after {
   content: var(--tooltip-text-time);
   position: absolute;
   bottom: 120%;
@@ -156,7 +156,7 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.flightTimeData .flightTime:hover::after {
+.flightTime:hover::after {
   opacity: 1;
 }
 
@@ -181,6 +181,7 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
+  z-index: 1000;
 }
 
 .aircraftData:hover::after {

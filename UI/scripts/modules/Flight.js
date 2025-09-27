@@ -60,7 +60,7 @@ class Flight {
           </div>
           <div class="flightSide">
             <div class="dataOfFlight">
-              <h4 class="timeOfDeparture">${departure.hours}h:${departure.minutes}m</h4>
+              <h4 class="timeOfDeparture">${departure.hours}:${departure.minutes}</h4>
               <h5 class="cityOfDeparture">${this.from}</h5>
               <h5 class="dateOfDeparture">${departure.day}</h5>
             </div>
@@ -69,17 +69,23 @@ class Flight {
               <h5 class="flightTime">${this.flightTime.hours}h:${this.flightTime.minutes}m</h5>
             </div>
             <div class="dataOfFlight">
-              <h4 class="timeOfArrival">${arrival.hours}h:${arrival.minutes}m</h4>
+              <h4 class="timeOfArrival">${arrival.hours}:${arrival.minutes}</h4>
               <h5 class="cityOfArrival">${this.to}</h5>
               <h5 class="dateOfArrival">${arrival.day}</h5>
             </div>
           </div>`;
 
     const flightTimeItem = flightCard.querySelector(".flightTime");
+    const aircraftItem = flightCard.querySelector(".aircraftData");
     flightTimeItem.style.setProperty(
       "--tooltip-text-time",
-      `Flight Time: ${this.flightTime.hours}h ${this.flightTime.minutes}m`
+      `'Flight Time: ${this.flightTime.hours}h ${this.flightTime.minutes}m'`
     );
+    aircraftItem.style.setProperty(
+      "--tooltip-text-aircraft",
+      `'Aircraft: ${this.aircraft}\\A Flight Number: ${this.flight}'`
+    );
+
     return flightCard;
   };
 }

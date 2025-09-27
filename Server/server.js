@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
 import { fileURLToPath } from "url";
 import path from "path";
 import mongoDB from "./models/MongoDB.js";
@@ -8,7 +9,6 @@ import FLight from "./models/Flight.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
-dotenv.config();
 
 const PORT = process.env.PORT;
 
