@@ -56,6 +56,7 @@ app.post("/flights/search", async (req, res) => {
   try {
     const filters = req.body;
 
+    // Проверка обязательных полей
     if (!filters.from || !filters.to || !filters.departure) {
       return res.status(400).json({
         error:
@@ -65,23 +66,36 @@ app.post("/flights/search", async (req, res) => {
 
     const flightsCollection = mongoDB.collection("flights");
 
-    const toQuery = {};
+    const date = new Date(filters.departure);
+    const nextDate = new Date(date);
+    nextDate.setDate(date.getDate() + 1);
 
-    if (filters.from) toQuery.from = filters.from;
-    if (filters.to) toQuery.to = filters.to;
-    if (filters.departure) toQuery.departure = filters.departure;
-
+    const toQuery = {
+      from: filters.from,
+      to: filters.to,
+      departure: {
+        $gte: date,
+        $lt: nextDate,
+      },
+    };
     const toFlights = await flightsCollection.find(toQuery).toArray();
 
-    const fromQuery = {};
+    let fromFlights = [];
     if (filters.arrival) {
-      fromQuery.arrival = filters.arrival;
-      fromQuery.from = filters.to;
-      fromQuery.to = filters.from;
+      const fromQuery = {
+        from: filters.to,
+        to: filters.from,
+        departure: {
+          $gte: date,
+          $lt: nextDate,
+        },
+        arrival: filters.arrival,
+      };
+      fromFlights = await flightsCollection.find(fromQuery).toArray();
     }
-    const fromFlights = await flightsCollection.find(fromQuery).toArray();
 
     const allFlights = [...toFlights, ...fromFlights];
+
     res.json(allFlights);
   } catch (err) {
     console.error("Error searching flights:", err);
