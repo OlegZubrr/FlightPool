@@ -88,6 +88,24 @@ class Flight {
 
     return flightCard;
   };
+
+  static sortByPrice(flights, ascending = true) {
+    return flights.sort((a, b) => {
+      if (ascending) {
+        return a.price - b.price;
+      } else {
+        return b.price - a.price;
+      }
+    });
+  }
+
+  static sortByFlightTime(flights, ascending = true) {
+    return flights.sort((a, b) => {
+      const aMinutes = a.flightTime.hours * 60 + a.flightTime.minutes;
+      const bMinutes = b.flightTime.hours * 60 + b.flightTime.minutes;
+      return ascending ? aMinutes - bMinutes : bMinutes - aMinutes;
+    });
+  }
 }
 
 export default Flight;
