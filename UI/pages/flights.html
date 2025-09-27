@@ -14,7 +14,19 @@
     <link rel="icon" href="../assets/icon.ico" type="image/x-icon" />
   </head>
   <body data-page="flights">
-    <div class="sidebar"><h3>Sort By:</h3></div>
+    <div class="sidebar">
+      <h3>Sort By:</h3>
+      <ul class="sortParamsUl">
+        <li>
+          <input type="checkbox" id="speedSortCB" />
+          <h4>Speed</h4>
+        </li>
+        <li>
+          <input type="checkbox" id="priceSortCB" />
+          <h4>Price</h4>
+        </li>
+      </ul>
+    </div>
     <div class="content">
       <h3>Flights</h3>
       <div class="flightsData"></div>

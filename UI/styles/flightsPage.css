@@ -19,9 +19,10 @@ body {
 
 .sidebar {
   height: 80%;
-  width: 30%;
+  width: 25%;
   background: rgba(240, 248, 255, 0.85);
   border-radius: 15px;
+  padding: 10px;
 }
 
 .sidebar h3 {
@@ -189,4 +190,26 @@ body {
 }
 .aircraftData .aircraft {
   margin-bottom: 3px;
+}
+
+.sortParamsUl {
+  list-style: none;
+  margin-top: 50px;
+}
+
+.sortParamsUl li {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  margin-left: 20px;
+}
+
+.sortParamsUl li h4 {
+  margin-left: 15px;
+  font-size: 1.3rem;
+}
+
+.sortParamsUl li input {
+  width: 20px;
+  height: 20px;
 }
