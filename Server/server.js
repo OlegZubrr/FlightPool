@@ -52,6 +52,43 @@ app.get("/toCities", async (req, res) => {
   }
 });
 
+app.post("/flights/search", async (req, res) => {
+  try {
+    const filters = req.body;
+
+    if (!filters.from || !filters.to || !filters.departure) {
+      return res.status(400).json({
+        error:
+          "Invalid request: 'from', 'to' and 'departure' are required fields",
+      });
+    }
+
+    const flightsCollection = mongoDB.collection("flights");
+
+    const toQuery = {};
+
+    if (filters.from) toQuery.from = filters.from;
+    if (filters.to) toQuery.to = filters.to;
+    if (filters.departure) toQuery.departure = filters.departure;
+
+    const toFlights = await flightsCollection.find(toQuery).toArray();
+
+    const fromQuery = {};
+    if (filters.arrival) {
+      fromQuery.arrival = filters.arrival;
+      fromQuery.from = filters.to;
+      fromQuery.to = filters.from;
+    }
+    const fromFlights = await flightsCollection.find(fromQuery).toArray();
+
+    const allFlights = [...toFlights, ...fromFlights];
+    res.json(allFlights);
+  } catch (err) {
+    console.error("Error searching flights:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server started on port: ${PORT}`);
 });
