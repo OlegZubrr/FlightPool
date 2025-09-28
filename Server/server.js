@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 import mongoDB from "./models/MongoDB.js";
 import FLight from "./models/Flight.js";
+import { error } from "console";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -58,7 +59,41 @@ app.get("/toCities", async (req, res) => {
   }
 });
 
-app.post("/flights/isValid", async (req, res) => {});
+app.get("/flights/isValid", async (req, res) => {
+  const { flight } = req.query;
+  const { places } = req.query;
+
+  if (!flight) {
+    return res.status(400).json({ error: "No flight parametr" });
+  }
+
+  if (!places) {
+    return res.status(400).json({ error: "No places parametr" });
+  }
+  try {
+    const flightsCollection = mongoDB.collection("flights");
+
+    const flightObj = await flightsCollection.findOne({ flight: flight });
+
+    if (!flightObj) {
+      return res.status(400).json({ error: `Flight ${flight} does not exist` });
+    }
+
+    if (flightObj.maxPassangers - flightObj.occupiedPlaces < Number(places)) {
+      return res
+        .status(400)
+        .json({ error: `Flight ${flight} does not have enough places` });
+    }
+
+    res.status(200).json({
+      valid: true,
+      availablePlaces: flightObj.maxPassangers - flightObj.occupiedPlaces,
+    });
+  } catch (err) {
+    console.error("Error validation flight:", err.message, err.stack);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 app.post("/flights/search", async (req, res) => {
   try {
