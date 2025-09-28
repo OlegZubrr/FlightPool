@@ -17,10 +17,7 @@ const initFlights = async () => {
     flights.push(flight);
   });
 
-  flights.forEach((flight) => {
-    const flightCard = flight.render();
-    flightsContainer.appendChild(flightCard);
-  });
+  Flight.showFlightCards(flights, flightsContainer);
 
   speedSortCB.addEventListener("change", () => {
     if (speedSortCB.checked) {
@@ -31,10 +28,7 @@ const initFlights = async () => {
 
       Flight.sortByFlightTime(flights);
 
-      flights.forEach((flight) => {
-        const flightCard = flight.render();
-        flightsContainer.appendChild(flightCard);
-      });
+      Flight.showFlightCards(flights, flightsContainer);
     }
   });
   priceSortCB.addEventListener("change", () => {
@@ -46,10 +40,7 @@ const initFlights = async () => {
 
       Flight.sortByPrice(flights);
 
-      flights.forEach((flight) => {
-        const flightCard = flight.render();
-        flightsContainer.appendChild(flightCard);
-      });
+      Flight.showFlightCards(flights, flightsContainer);
     }
   });
 };

@@ -106,6 +106,22 @@ class Flight {
       return ascending ? aMinutes - bMinutes : bMinutes - aMinutes;
     });
   }
+
+  static showFlightCards(flights, container) {
+    flights.forEach((flight, i) => {
+      const flightCard = flight.render();
+
+      container.appendChild(flightCard);
+
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            flightCard.classList.add("show");
+          });
+        });
+      }, 300 * i);
+    });
+  }
 }
 
 export default Flight;

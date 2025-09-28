@@ -71,8 +71,15 @@ body {
   display: flex;
   padding: 10px;
   margin-bottom: 30px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
+.flightCart.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 .flightCart .priceSide {
   height: 100%;
   width: 20%;
