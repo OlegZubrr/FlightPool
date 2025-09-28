@@ -58,6 +58,8 @@ app.get("/toCities", async (req, res) => {
   }
 });
 
+app.post("/flights/isValid", async (req, res) => {});
+
 app.post("/flights/search", async (req, res) => {
   try {
     const filters = req.body;
@@ -87,6 +89,17 @@ app.post("/flights/search", async (req, res) => {
         $gte: departureDate,
         $lt: nextDepartureDate,
       },
+      $expr: {
+        $gte: [
+          {
+            $subtract: [
+              { $toInt: "$maxPassengers" },
+              { $toInt: "$occupiedPlaces" },
+            ],
+          },
+          Number(filters.passengers),
+        ],
+      },
     };
 
     const toFlights = await flightsCollection.find(toQuery).toArray();
@@ -103,6 +116,17 @@ app.post("/flights/search", async (req, res) => {
         departure: {
           $gte: arrivalDate,
           $lt: nextArrivalDate,
+        },
+        $expr: {
+          $gte: [
+            {
+              $subtract: [
+                { $toInt: "$maxPassengers" },
+                { $toInt: "$occupiedPlaces" },
+              ],
+            },
+            Number(filters.passengers),
+          ],
         },
       };
       fromFlights = await flightsCollection.find(fromQuery).toArray();

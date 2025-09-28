@@ -7,11 +7,11 @@ const testFlightsData = [
     to: "Lisbon",
     flight: "TP122_2",
     aircraft: "Embraer E195",
-    departure: "2025-09-27 22:30",
-    arrival: "2025-09-28 2:15",
-    price: 63,
+    departure: "2025-09-27 23:30",
+    arrival: "2025-09-28 1:40",
+    price: 15,
     maxPassangers: 120,
-    occupiedPlaces: 65,
+    occupiedPlaces: 120,
   },
 ];
 
