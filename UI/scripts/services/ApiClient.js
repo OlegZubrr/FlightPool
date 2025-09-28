@@ -4,10 +4,10 @@ class ApiClient {
   }
 
   async request(endpoint, options = {}, timeout = 5000) {
-    try {
-      const controller = new AbortController();
-      const id = setTimeout(() => controller.abort(), timeout);
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
 
+    try {
       const response = await fetch(`${this.baseURL}${endpoint}`, {
         ...options,
         signal: controller.signal,
@@ -15,14 +15,20 @@ class ApiClient {
 
       clearTimeout(id);
 
-      if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
-      }
-
-      return await response.json();
+      const data = await response.json().catch(() => null);
+      return {
+        status: response.status,
+        ok: response.ok,
+        data,
+      };
     } catch (err) {
+      clearTimeout(id);
       console.error(`Failed to fetch ${endpoint}:`, err);
-      return null;
+      return {
+        status: 0,
+        ok: false,
+        data: { error: err.message },
+      };
     }
   }
 

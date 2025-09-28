@@ -9,7 +9,7 @@ const initFlights = async () => {
 
   const api = new ApiClient();
 
-  const flightsData = await api.post("/flights/search", filters);
+  const flightsData = (await api.post("/flights/search", filters)).data;
   const flights = [];
 
   flightsData.forEach((flightData) => {

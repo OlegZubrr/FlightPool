@@ -18,7 +18,7 @@ const initMain = async () => {
 
   const api = new ApiClient();
 
-  const fromCityDataList = await api.get("/fromCities");
+  const fromCityDataList = (await api.get("/fromCities")).data;
 
   const fromCitiesLiveSearch = new LiveSearch(
     fromListInput,
@@ -37,9 +37,9 @@ const initMain = async () => {
   whereCity.addEventListener("click", async (e) => {
     e.stopPropagation();
     const fromCityName = fromCity.textContent;
-    const whereCityDataList = await api.get(
-      `/toCities?fromCity=${fromCityName}`
-    );
+    const whereCityDataList = (
+      await api.get(`/toCities?fromCity=${fromCityName}`)
+    ).data;
     const whereCitiesLiveSearch = new LiveSearch(
       whereListInput,
       whereList,
