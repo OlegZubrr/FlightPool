@@ -242,6 +242,8 @@ body {
   flex-direction: column;
   align-items: flex-start;
   margin-top: 20px;
+  max-height: 180px;
+  overflow-y: auto;
 }
 
 .sidebar-flights-container li {

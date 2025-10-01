@@ -43,7 +43,32 @@ class Flight {
     };
   };
 
-  render = () => {
+  renderBascetVersion = (bascetContainer) => {
+    const cardRow = document.createElement("li");
+    cardRow.setAttribute("id", `li${this.flight}`);
+    cardRow.innerHTML = `<div class="sideBar-flightCard">
+            <div class="priceSide">
+              <p class="price">${this.price}$</p>
+              <p class="flight">${this.flight}</p>
+            </div>
+            <div class="tripSide">
+              <p class="from">${this.from}</p>
+              <span class="arrow">&#8594;</span>
+              <p class="to">${this.to}</p>
+            </div>
+          </div>
+          <a class="deleteFromBascetBtn">X</a>`;
+
+    const deleteBtn = cardRow.querySelector(".deleteFromBascetBtn");
+
+    deleteBtn.addEventListener("click", () => {
+      const row = bascetContainer.querySelector(`#li${this.flight}`);
+      row.remove();
+    });
+    bascetContainer.appendChild(cardRow);
+  };
+
+  render = (bascetContainer) => {
     const departure = this.formatTime(this.departureRaw);
     const arrival = this.formatTime(this.arrivalRaw);
 
@@ -77,6 +102,7 @@ class Flight {
 
     const flightTimeItem = flightCard.querySelector(".flightTime");
     const aircraftItem = flightCard.querySelector(".aircraftData");
+    const selectBtn = flightCard.querySelector(".SelectFlightBtn");
     flightTimeItem.style.setProperty(
       "--tooltip-text-time",
       `'Flight Time: ${this.flightTime.hours}h ${this.flightTime.minutes}m'`
@@ -85,6 +111,10 @@ class Flight {
       "--tooltip-text-aircraft",
       `'Aircraft: ${this.aircraft}\\A Flight Number: ${this.flight}'`
     );
+
+    selectBtn.addEventListener("click", () => {
+      this.renderBascetVersion(bascetContainer);
+    });
 
     return flightCard;
   };
@@ -107,9 +137,9 @@ class Flight {
     });
   }
 
-  static showFlightCards(flights, container) {
+  static showFlightCards(flights, container, bascetContainer) {
     flights.forEach((flight, i) => {
-      const flightCard = flight.render();
+      const flightCard = flight.render(bascetContainer);
 
       container.appendChild(flightCard);
 
