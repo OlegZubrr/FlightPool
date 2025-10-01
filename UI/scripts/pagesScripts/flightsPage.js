@@ -4,6 +4,16 @@ import Flight from "../modules/Flight.js";
 const initFlights = async () => {
   const flightsContainer = document.querySelector(".flightsData");
   const filters = JSON.parse(sessionStorage.getItem("filters"));
+
+  let maxFlightsCount = 0;
+  let currentFlightsCount = 0;
+
+  if (filters.arrival) {
+    maxFlightsCount = 2;
+  } else {
+    maxFlightsCount = 1;
+  }
+
   const speedSortCB = document.getElementById("speedSortCB");
   const priceSortCB = document.getElementById("priceSortCB");
 
