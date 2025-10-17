@@ -7,6 +7,7 @@ class Flight {
     this.departureRaw = new Date(departure);
     this.arrivalRaw = new Date(arrival);
     this.price = price;
+    this.isInBascet = false;
 
     const totalMinutes = Math.round(
       (this.arrivalRaw - this.departureRaw) / (1000 * 60)
@@ -63,6 +64,9 @@ class Flight {
 
     deleteBtn.addEventListener("click", () => {
       const row = bascetContainer.querySelector(`#li${this.flight}`);
+      const flightCard = document.getElementById(this.flight);
+      flightCard.classList.remove("selected");
+      this.isInBascet = false;
       row.remove();
     });
     bascetContainer.appendChild(cardRow);
@@ -113,7 +117,17 @@ class Flight {
     );
 
     selectBtn.addEventListener("click", () => {
-      this.renderBascetVersion(bascetContainer);
+      if (!this.isInBascet) {
+        this.renderBascetVersion(bascetContainer);
+        this.isInBascet = true;
+      } else {
+        const row = bascetContainer.querySelector(`#li${this.flight}`);
+        row.remove();
+        this.isInBascet = false;
+      }
+
+      const flightCard = document.getElementById(this.flight);
+      flightCard.classList.toggle("selected");
     });
 
     return flightCard;
