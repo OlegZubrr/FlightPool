@@ -17,6 +17,8 @@ class Flight {
       minutes: totalMinutes % 60,
     };
   }
+  static maxSelectedFlights = 0;
+  static cureentSelectedFlights = 0;
 
   formatTime = (date) => {
     const day = date.getDate();
@@ -68,6 +70,9 @@ class Flight {
       flightCard.classList.remove("selected");
       this.isInBascet = false;
       row.remove();
+      if (Flight.cureentSelectedFlights > 0) {
+        Flight.cureentSelectedFlights--;
+      }
     });
     bascetContainer.appendChild(cardRow);
   };
@@ -117,17 +122,23 @@ class Flight {
     );
 
     selectBtn.addEventListener("click", () => {
+      const flightCard = document.getElementById(this.flight);
       if (!this.isInBascet) {
-        this.renderBascetVersion(bascetContainer);
-        this.isInBascet = true;
+        if (Flight.cureentSelectedFlights < Flight.maxSelectedFlights) {
+          Flight.cureentSelectedFlights++;
+          this.renderBascetVersion(bascetContainer);
+          flightCard.classList.add("selected");
+          this.isInBascet = true;
+        }
       } else {
         const row = bascetContainer.querySelector(`#li${this.flight}`);
         row.remove();
         this.isInBascet = false;
+        if (Flight.cureentSelectedFlights > 0) {
+          Flight.cureentSelectedFlights--;
+          flightCard.classList.remove("selected");
+        }
       }
-
-      const flightCard = document.getElementById(this.flight);
-      flightCard.classList.toggle("selected");
     });
 
     return flightCard;

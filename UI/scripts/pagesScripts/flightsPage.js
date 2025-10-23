@@ -5,14 +5,16 @@ const initFlights = async () => {
   const flightsContainer = document.querySelector(".flightsData");
   const filters = JSON.parse(sessionStorage.getItem("filters"));
 
-  let maxFlightsCount = 0;
-  let currentFlightsCount = 0;
+  let maxSelectedFlights = 0;
+  let currentSelectedFlights = 0;
 
   if (filters.arrival) {
-    maxFlightsCount = 2;
+    maxSelectedFlights = 2;
   } else {
-    maxFlightsCount = 1;
+    maxSelectedFlights = 1;
   }
+
+  Flight.maxSelectedFlights = maxSelectedFlights;
 
   const speedSortCB = document.getElementById("speedSortCB");
   const priceSortCB = document.getElementById("priceSortCB");
